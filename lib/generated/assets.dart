@@ -35,7 +35,9 @@ class Assets {
   static const String imagesNotificationTour =
       'assets/images/notification_tour.png';
   static const String imagesPdfIcon = 'assets/images/pdf_icon.svg';
+  static const String imagesPlay = 'assets/images/play.png';
   static const String imagesRemont = 'assets/images/remont.png';
+  static const String imagesSubtract = 'assets/images/Subtract.png';
   static const String imagesUpdate = 'assets/images/update.svg';
   static const String imagesXMarkImg = 'assets/images/x_mark_img.svg';
   static const String logoMedtochka = 'assets/images/logo/medtochka.svg';

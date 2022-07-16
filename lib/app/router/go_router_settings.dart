@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hakaton/app/router/route_info.dart';
 import 'package:hakaton/app/ui/main/main_page.dart';
+import 'package:hakaton/app/ui/splash/splash_page.dart';
 
 class GoRouterSettings {
   static final router = GoRouter(
@@ -14,6 +15,11 @@ class GoRouterSettings {
           index: int.tryParse(state.params['index']!)!,
         ),
       ),
+      GoRoute(
+        path: RouteInfo.splash.path,
+        name: RouteInfo.splash.name,
+        builder: (context, state) => SplashPage(),
+      ),
     ],
     navigatorBuilder: (_, __, widget) {
       /// hack: scaffold нужен для отображения снекбара над bottomSheet.
@@ -21,7 +27,7 @@ class GoRouterSettings {
         body: widget,
       );
     },
-    initialLocation: '/0',
+    initialLocation: '/splash',
     debugLogDiagnostics: kDebugMode,
   );
 }

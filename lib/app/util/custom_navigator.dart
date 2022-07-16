@@ -24,8 +24,6 @@ class CustomNavigator {
     name, {
     Map<String, String> params = const {},
   }) {
-    print(name);
-    print(params);
     _router.goNamed(
       name,
       params: params,
