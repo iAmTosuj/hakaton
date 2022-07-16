@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hakaton/app/router/route_info.dart';
+import 'package:hakaton/app/ui/auth/auth_page.dart';
 import 'package:hakaton/app/ui/main/main_page.dart';
 import 'package:hakaton/app/ui/splash/splash_page.dart';
 
@@ -19,6 +20,11 @@ class GoRouterSettings {
         path: RouteInfo.splash.path,
         name: RouteInfo.splash.name,
         builder: (context, state) => SplashPage(),
+      ),
+      GoRoute(
+        path: RouteInfo.auth.path,
+        name: RouteInfo.auth.name,
+        builder: (context, state) => AuthPage(),
       ),
     ],
     navigatorBuilder: (_, __, widget) {

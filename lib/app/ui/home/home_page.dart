@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/resources/ui_icon.dart';
 import 'package:hakaton/app/ui/home/spec_action_card.dart';
@@ -21,7 +23,7 @@ class HomePage extends StatelessWidget {
                 'AVA Prime',
                 style: ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Row(
@@ -29,17 +31,17 @@ class HomePage extends StatelessWidget {
                   Container(
                     width: 36,
                     height: 36,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xFF393B40),
                     ),
                     alignment: Alignment.center,
-                    child: Text(
+                    child: const Text(
                       'В',
-                      style: TextStyle(color: ResColors.bgGray0),
+                      style: const TextStyle(color: ResColors.bgGray0),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Text(
@@ -47,13 +49,13 @@ class HomePage extends StatelessWidget {
                     style: ResTextTheme.headline6
                         .copyWith(color: ResColors.bgGray0),
                   ),
-                  Icon(
+                  const Icon(
                     UiIcon.arrow_right,
                     color: ResColors.bgGray0,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               Padding(
@@ -61,13 +63,13 @@ class HomePage extends StatelessWidget {
                 child: SizedBox(
                   height: 36,
                   child: TextField(
-                    style: TextStyle(color: ResColors.bgGray0),
+                    style: const TextStyle(color: ResColors.bgGray0),
                     decoration: InputDecoration(
                       isDense: true,
                       filled: true,
-                      fillColor: Color(0xFF1C355A),
+                      fillColor: const Color(0xFF1C355A),
                       hintText: 'услуги',
-                      contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                       hintStyle: ResTextTheme.body1
                           .merge(const TextStyle(color: ResColors.textInfo)),
                       border: const OutlineInputBorder(
@@ -85,7 +87,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Text(
@@ -93,7 +95,7 @@ class HomePage extends StatelessWidget {
                 style:
                     ResTextTheme.headline6.copyWith(color: ResColors.bgGray0),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               SizedBox(
@@ -101,7 +103,7 @@ class HomePage extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  children: [
+                  children: const [
                     SpecActionCard(
                       gradientColor: [
                         Color(0xFF6300D7),
@@ -140,49 +142,51 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 16,
+              const SizedBox(
+                height: 24,
               ),
-              Text(
-                'Ближайшие события',
-                style: ResTextTheme.body2.copyWith(color: ResColors.bgGray0),
+              BlocBuilder<ServicesCubit, ServicesState>(
+                builder: (context, state) {
+                  final filteredModel = state.servicesModel
+                      .where((e) => e.status == 'time_scheduled');
+                  if (filteredModel.isEmpty) {
+                    return const SizedBox();
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Ближайшие события',
+                        style: ResTextTheme.body2
+                            .copyWith(color: ResColors.bgGray0),
+                      ),
+                      ...filteredModel
+                          .map<Widget>(
+                            (e) => ListTile(
+                              leading: const Icon(
+                                UiIcon.alarm,
+                                size: 40,
+                                color: ResColors.bgGray0,
+                              ),
+                              title: Text(
+                                'назначена встреча',
+                                style: ResTextTheme.body2.copyWith(
+                                    color: ResColors.bgGray0,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              subtitle: Text(
+                                e.name,
+                                style: ResTextTheme.body1
+                                    .copyWith(color: ResColors.bgGray0),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ],
+                  );
+                },
               ),
-              SizedBox(
-                height: 8,
-              ),
-              ListTile(
-                leading: Icon(
-                  UiIcon.alarm,
-                  size: 40,
-                  color: ResColors.bgGray0,
-                ),
-                title: Text(
-                  'назначена встреча',
-                  style: ResTextTheme.body2.copyWith(
-                      color: ResColors.bgGray0, fontWeight: FontWeight.w400),
-                ),
-                subtitle: Text(
-                  'Заявка на замену счётчиков',
-                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  UiIcon.alarm,
-                  size: 40,
-                  color: ResColors.bgGray0,
-                ),
-                title: Text(
-                  'назначена встреча',
-                  style: ResTextTheme.body2.copyWith(
-                      color: ResColors.bgGray0, fontWeight: FontWeight.w400),
-                ),
-                subtitle: Text(
-                  'Заявка на устранение недочётов',
-                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
-                ),
-              ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
             ],
@@ -190,6 +194,21 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _getCurrentStatus(String status) {
+    switch (status) {
+      case 'created':
+        return 'На рассмотрении';
+      case 'in_process':
+        return 'В работе';
+      case 'time_matching':
+        return 'Согласование времени';
+      case 'time_scheduled':
+        return 'Время назначено';
+      case 'finished':
+        return 'Завершено';
+    }
   }
 }
 
@@ -206,20 +225,21 @@ class myHome extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('г. Краснодар ул. Красная д 21 кв 49'),
-            SizedBox(
+            const Text('г. Краснодар ул. Красная д 21 кв 49'),
+            const SizedBox(
               height: 8,
             ),
-            Text('1-комн кв. 42 км/м 5/14 этаж'),
-            SizedBox(
+            const Text('1-комн кв. 42 км/м 5/14 этаж'),
+            const SizedBox(
               height: 8,
             ),
             Row(
               children: [
-                Text('Статус: '),
+                const Text('Статус: '),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-                  decoration: BoxDecoration(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(8),
                     ),
@@ -238,7 +258,7 @@ class myHome extends StatelessWidget {
               height: 35,
               child: TextButton(
                 onPressed: () {},
-                child: Text('Подробнее'),
+                child: const Text('Подробнее'),
               ),
             )
           ],

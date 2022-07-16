@@ -27,6 +27,7 @@ class Assets {
       'assets/images/empty_chat_message.svg';
   static const String imagesExclamationMark =
       'assets/images/exclamation_mark.svg';
+  static const String imagesFireworks = 'assets/images/fireworks.png';
   static const String imagesMail = 'assets/images/mail.svg';
   static const String imagesMedcardNeedAddEmail =
       'assets/images/medcard_need_add_email.png';

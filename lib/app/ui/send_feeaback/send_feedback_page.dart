@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/resources/ui_icon.dart';
 import 'package:hakaton/app/util/text_theme.dart';
@@ -14,8 +16,10 @@ enum FeedType {
 
 class SendFeedbackPage extends StatefulWidget {
   final FeedType type;
+  final String name;
 
-  const SendFeedbackPage({Key? key, this.type = FeedType.def})
+  const SendFeedbackPage(
+      {Key? key, this.type = FeedType.def, required this.name})
       : super(key: key);
 
   @override
@@ -24,6 +28,7 @@ class SendFeedbackPage extends StatefulWidget {
 
 class _SendFeedbackPageState extends State<SendFeedbackPage> {
   List<File> files = [];
+  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +81,7 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
                   style: TextStyle(color: ResColors.bgGray0),
                   maxLines: 7,
                   minLines: 5,
+                  controller: controller,
                   decoration: InputDecoration(
                     isDense: true,
                     filled: true,
@@ -162,16 +168,32 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
                 Spacer(),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Color(0xFF1C355A),
-                    ),
-                    child: Text(
-                      'отправить',
-                      style: ResTextTheme.caption,
-                    ),
+                  child: BlocBuilder<ServicesCubit, ServicesState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () => BlocProvider.of<ServicesCubit>(context)
+                            .sendServices(
+                          name: widget.name,
+                          description: controller.text,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: Color(0xFF1C355A),
+                        ),
+                        child: !state.isLoading
+                            ? Text(
+                                'отправить',
+                                style: ResTextTheme.caption,
+                              )
+                            : SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                      );
+                    },
                   ),
                 ),
               ],

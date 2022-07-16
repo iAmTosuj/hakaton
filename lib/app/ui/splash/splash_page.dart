@@ -17,11 +17,11 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(
           Duration(milliseconds: 700),
-          () => CustomNavigator.goNamed(
-                RouteInfo.mainPage.name,
-                params: RouteInfo.mainPage
-                    .getParams(extraParams: {'index': 0.toString()}),
-              ));
+          () =>                         CustomNavigator.goNamed(
+            RouteInfo.mainPage.name,
+            params: RouteInfo.mainPage
+                .getParams(extraParams: {'index': 0.toString()}),
+          ));
     });
 
     super.initState();

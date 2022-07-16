@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/router/go_router_settings.dart';
 import 'package:hakaton/app/theme/custom_theme.dart';
@@ -46,21 +48,28 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: const TextStyle(color: ResColors.text),
-      child: MaterialApp.router(
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [Locale('ru', 'RU')],
-        title: 'Ава груп',
-        debugShowCheckedModeBanner: true,
-        theme: customTheme,
-        routerDelegate: _router.routerDelegate,
-        routeInformationParser: _router.routeInformationParser,
-        routeInformationProvider: _router.routeInformationProvider,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ServicesCubit>(
+          create: (context) => ServicesCubit()..getServices(),
+        )
+      ],
+      child: DefaultTextStyle(
+        style: const TextStyle(color: ResColors.text),
+        child: MaterialApp.router(
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('ru', 'RU')],
+          title: 'Ава груп',
+          debugShowCheckedModeBanner: true,
+          theme: customTheme,
+          routerDelegate: _router.routerDelegate,
+          routeInformationParser: _router.routeInformationParser,
+          routeInformationProvider: _router.routeInformationProvider,
+        ),
       ),
     );
   }
