@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/resources/ui_icon.dart';
 import 'package:hakaton/app/router/route_info.dart';
+import 'package:hakaton/app/ui/feedback/feedback_page.dart';
 import 'package:hakaton/app/ui/home/home_page.dart';
+import 'package:hakaton/app/ui/services/services_page.dart';
 import 'package:hakaton/app/util/custom_navigator.dart';
 import 'package:hakaton/app/util/lazy_indexed_stack.dart';
 
@@ -26,14 +28,14 @@ class _MainPageState extends State<MainPage> {
       label: 'Главная',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(UiIcon.ruble, color: MainPage._unselectedColor),
-      activeIcon: Icon(UiIcon.ruble, color: MainPage._selectedColor),
+      icon: Icon(UiIcon.hand_shaking, color: MainPage._unselectedColor),
+      activeIcon: Icon(UiIcon.hand_shaking, color: MainPage._selectedColor),
       label: 'Услуги',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(UiIcon.heart, color: MainPage._unselectedColor),
-      activeIcon: Icon(UiIcon.heart, color: MainPage._selectedColor),
-      label: 'Обращения',
+      icon: Icon(UiIcon.support, color: MainPage._unselectedColor),
+      activeIcon: Icon(UiIcon.support, color: MainPage._selectedColor),
+      label: 'Поддержка',
     ),
   ];
   late final List<Widget> _pages;
@@ -42,36 +44,62 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
 
-    _pages = [
-      HomePage(),
-      Center(child: Text('Услуги')),
-      Center(child: Text('Обращения'))
-    ];
+    _pages = [HomePage(), ServicesPage(), FeedbackPage()];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LazyLoadIndexedStack(
-        index: widget.index,
-        children: _pages,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF1C355A),
+              Color(0xFF0F1E34),
+            ],
+            tileMode: TileMode.decal,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: LazyLoadIndexedStack(
+          index: widget.index,
+          children: _pages,
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _tabs,
-        showUnselectedLabels: true,
-        backgroundColor: ResColors.bgGray0,
-        unselectedItemColor: MainPage._unselectedColor,
-        selectedItemColor: MainPage._selectedColor,
-        currentIndex: widget.index,
-        selectedFontSize: MainPage._textSize,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          CustomNavigator.goNamed(
-            RouteInfo.mainPage.name,
-            params: RouteInfo.mainPage
-                .getParams(extraParams: {'index': index.toString()}),
-          );
-        },
+      bottomNavigationBar: Stack(
+        children: [
+          Container(
+            height: 58,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              colors: [
+                Color(0xFF1C355A),
+                Color(0xFF213F7E),
+              ],
+              tileMode: TileMode.clamp,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            )),
+          ),
+          BottomNavigationBar(
+            items: _tabs,
+            showUnselectedLabels: true,
+            backgroundColor: Colors.transparent,
+            unselectedItemColor: MainPage._unselectedColor,
+            selectedItemColor: MainPage._selectedColor,
+            currentIndex: widget.index,
+            selectedFontSize: MainPage._textSize,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) {
+              CustomNavigator.goNamed(
+                RouteInfo.mainPage.name,
+                params: RouteInfo.mainPage
+                    .getParams(extraParams: {'index': index.toString()}),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
