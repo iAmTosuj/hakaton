@@ -7,7 +7,10 @@ class RouteInfo {
     path: r'/:index(\d+)',
     name: 'main',
   );
-
+  static final RouteInfo splash = RouteInfo(
+    path: '/splash',
+    name: 'splash',
+  );
   RouteInfo({
     required this.name,
     required this.path,
