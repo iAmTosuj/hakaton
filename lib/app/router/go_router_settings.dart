@@ -5,6 +5,7 @@ import 'package:hakaton/app/router/route_info.dart';
 import 'package:hakaton/app/ui/auth/auth_page.dart';
 import 'package:hakaton/app/ui/main/main_page.dart';
 import 'package:hakaton/app/ui/splash/splash_page.dart';
+import 'package:hakaton/app/ui/welcome_screen/welcome_screen_page.dart';
 
 class GoRouterSettings {
   static final router = GoRouter(
@@ -25,6 +26,11 @@ class GoRouterSettings {
         path: RouteInfo.auth.path,
         name: RouteInfo.auth.name,
         builder: (context, state) => AuthPage(),
+      ),
+      GoRoute(
+        path: RouteInfo.welcome.path,
+        name: RouteInfo.welcome.name,
+        builder: (context, state) => WelcomeScreenPage(),
       ),
     ],
     navigatorBuilder: (_, __, widget) {

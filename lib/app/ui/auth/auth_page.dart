@@ -110,9 +110,7 @@ class _AuthPageState extends State<AuthPage> {
                     } else {
                       if (codeController.text.length == 4) {
                         CustomNavigator.goNamed(
-                          RouteInfo.mainPage.name,
-                          params: RouteInfo.mainPage
-                              .getParams(extraParams: {'index': 0.toString()}),
+                          RouteInfo.welcome.name,
                         );
                       }
                     }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
+import 'package:hakaton/app/router/route_info.dart';
+import 'package:hakaton/app/util/custom_navigator.dart';
 import 'package:hakaton/app/util/text_theme.dart';
 import 'package:hakaton/generated/assets.dart';
 
@@ -47,7 +49,11 @@ class SuccessScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    CustomNavigator.goNamed(
+                      RouteInfo.mainPage.name,
+                      params: RouteInfo.mainPage
+                          .getParams(extraParams: {'index': 0.toString()}),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,

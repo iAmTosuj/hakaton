@@ -54,10 +54,9 @@ class _MainPageState extends State<MainPage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF1C355A),
+              Color(0xFF182F50),
               Color(0xFF0F1E34),
             ],
-            tileMode: TileMode.decal,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -74,8 +73,9 @@ class _MainPageState extends State<MainPage> {
             decoration: BoxDecoration(
                 gradient: LinearGradient(
               colors: [
-                Color(0xFF1C355A),
-                Color(0xFF213F7E),
+                Color(0xFF21387E),
+                Color(0xFF1C2F6C),
+                Color(0xFF1C2E5A),
               ],
               tileMode: TileMode.clamp,
               begin: Alignment.topCenter,

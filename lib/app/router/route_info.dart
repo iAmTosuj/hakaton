@@ -17,7 +17,10 @@ class RouteInfo {
     path: '/auth',
     name: 'auth',
   );
-
+  static final RouteInfo welcome = RouteInfo(
+    path: '/welcome',
+    name: 'welcome',
+  );
   RouteInfo({
     required this.name,
     required this.path,
