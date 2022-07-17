@@ -171,11 +171,19 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
                   child: BlocBuilder<ServicesCubit, ServicesState>(
                     builder: (context, state) {
                       return ElevatedButton(
-                        onPressed: () => BlocProvider.of<ServicesCubit>(context)
-                            .sendServices(
-                          name: widget.name,
-                          description: controller.text,
-                        ),
+                        onPressed: () async {
+                          await BlocProvider.of<ServicesCubit>(context)
+                              .sendServices(
+                            name: widget.name,
+                            description: controller.text,
+                          );
+
+                          Navigator.pop(context);
+
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Заявка успешно отправлена'),
+                          ));
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Color(0xFF1C355A),

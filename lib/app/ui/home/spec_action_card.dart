@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
+import 'package:hakaton/app/ui/success_screen.dart';
+import 'package:hakaton/app/util/custom_navigator.dart';
 import 'package:hakaton/app/util/text_theme.dart';
 
 class SpecActionCard extends StatelessWidget {
@@ -64,7 +68,15 @@ class SpecActionCard extends StatelessWidget {
                 height: 30,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    BlocProvider.of<ServicesCubit>(context).sendServices(
+                      name: title,
+                      description: 'Свяжемся с вами в ближайшее время!',
+                    );
+
+                    CustomNavigator.pushWidget(
+                        context: context, child: const SuccessScreen());
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
                     onPrimary: Color(0xFF1C355A),

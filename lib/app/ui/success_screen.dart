@@ -6,7 +6,9 @@ import 'package:hakaton/app/util/text_theme.dart';
 import 'package:hakaton/generated/assets.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({Key? key}) : super(key: key);
+  final bool goHome;
+
+  const SuccessScreen({Key? key, this.goHome = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +51,17 @@ class SuccessScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    CustomNavigator.goNamed(
-                      RouteInfo.mainPage.name,
-                      params: RouteInfo.mainPage
-                          .getParams(extraParams: {'index': 0.toString()}),
-                    );
+                    if (goHome) {
+                      CustomNavigator.goNamed(
+                        RouteInfo.mainPage.name,
+                        params: RouteInfo.mainPage
+                            .getParams(extraParams: {'index': 0.toString()}),
+                      );
+
+                      return;
+                    }
+
+                    Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,

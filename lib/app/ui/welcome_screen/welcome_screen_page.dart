@@ -203,7 +203,10 @@ class _SecondStep extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   CustomNavigator.pushWidget(
-                      context: context, child: SuccessScreen());
+                      context: context,
+                      child: SuccessScreen(
+                        goHome: true,
+                      ));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
