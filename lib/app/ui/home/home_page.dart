@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/resources/ui_icon.dart';
+import 'package:hakaton/app/router/route_info.dart';
 import 'package:hakaton/app/ui/home/spec_action_card.dart';
+import 'package:hakaton/app/util/custom_navigator.dart';
 import 'package:hakaton/app/util/text_theme.dart';
 
 class HomePage extends StatelessWidget {
@@ -64,6 +66,11 @@ class HomePage extends StatelessWidget {
                   height: 36,
                   child: TextField(
                     style: const TextStyle(color: ResColors.bgGray0),
+                    onTap: () => CustomNavigator.goNamed(
+                      RouteInfo.mainPage.name,
+                      params: RouteInfo.mainPage
+                          .getParams(extraParams: {'index': 1.toString()}),
+                    ),
                     decoration: InputDecoration(
                       isDense: true,
                       filled: true,

@@ -84,7 +84,7 @@ final List<List<Color>> gradients = [
 ];
 final List<IconData> iconsServices = [
   Icons.home,
-  Icons.sports_handball_sharp,
+  Icons.family_restroom,
   Icons.margin,
   Icons.chair,
   Icons.cookie,

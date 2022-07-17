@@ -15,7 +15,7 @@ class _AuthPageState extends State<AuthPage> {
   String phone = '';
   String code = '';
   bool codeSend = false;
-  final phoneController = TextEditingController();
+  final phoneController = TextEditingController()..text = '+7';
   final codeController = TextEditingController();
 
   @override
@@ -76,7 +76,7 @@ class _AuthPageState extends State<AuthPage> {
                   fillColor: const Color(0xFF1C355A),
                   hintText: '+79999999999',
                   hintStyle: ResTextTheme.body1
-                      .merge(const TextStyle(color: ResColors.bgGray0)),
+                      .merge(const TextStyle(color: ResColors.textSecondary)),
                   border: const UnderlineInputBorder(
                       borderSide: const BorderSide(color: Color(0xFF56CCF2))),
                 ),
@@ -92,7 +92,7 @@ class _AuthPageState extends State<AuthPage> {
                     fillColor: const Color(0xFF1C355A),
                     hintText: 'Код из смс',
                     hintStyle: ResTextTheme.body1
-                        .merge(const TextStyle(color: ResColors.bgGray0)),
+                        .merge(const TextStyle(color: ResColors.textSecondary)),
                     border: const UnderlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFF56CCF2))),
                   ),
