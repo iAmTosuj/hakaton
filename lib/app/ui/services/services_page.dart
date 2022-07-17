@@ -87,6 +87,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   children: newServicesList
                       .mapIndexed(
                         (i, e) => ServicesCard(
+                          controller: controller,
                           gradient: gradients[i % (gradients.length)],
                           title: e.name,
                           subtitle: e.description,

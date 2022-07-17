@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
         child: SafeArea(
           child: Center(
             child: Text(
-              'AVA Prime',
+              'Acedia Prime',
               style: ResTextTheme.headline3.copyWith(
                 color: ResColors.bgGray0,
               ),

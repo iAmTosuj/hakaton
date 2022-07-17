@@ -14,9 +14,11 @@ class ServicesCard extends StatelessWidget {
   final Icon icon;
   final List<Color> gradient;
   final bool isPrimary;
+  final TextEditingController controller;
 
   const ServicesCard({
     Key? key,
+    required this.controller,
     required this.title,
     required this.subtitle,
     required this.icon,
@@ -95,6 +97,8 @@ class ServicesCard extends StatelessWidget {
                   name: title,
                   description: 'Свяжемся с вами в ближайшее время!',
                 );
+                FocusScope.of(context).unfocus();
+                controller.clear();
 
                 CustomNavigator.pushWidget(
                     context: context, child: const SuccessScreen());

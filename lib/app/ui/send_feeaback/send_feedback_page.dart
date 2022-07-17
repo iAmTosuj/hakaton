@@ -7,6 +7,7 @@ import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/resources/ui_icon.dart';
 import 'package:hakaton/app/util/text_theme.dart';
+import 'package:hakaton/main.dart';
 
 enum FeedType {
   problem,
@@ -179,6 +180,13 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
                           );
 
                           Navigator.pop(context);
+
+                          await PushNotification.plugin.show(
+                              12345,
+                              "Заявка успешно отправлена",
+                              "С вами свяжутся в ближайшее время",
+                              PushNotification.platformChannelSpecifics,
+                              payload: 'data');
 
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: const Text('Заявка успешно отправлена'),

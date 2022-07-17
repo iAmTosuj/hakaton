@@ -50,20 +50,23 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF182F50),
-              Color(0xFF0F1E34),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF182F50),
+                Color(0xFF0F1E34),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
-        ),
-        child: LazyLoadIndexedStack(
-          index: widget.index,
-          children: _pages,
+          child: LazyLoadIndexedStack(
+            index: widget.index,
+            children: _pages,
+          ),
         ),
       ),
       bottomNavigationBar: Stack(

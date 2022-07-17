@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'services_model.freezed.dart';
@@ -11,6 +10,7 @@ class ServicesModel with _$ServicesModel {
     required String name,
     required String status,
     required String description,
+    String? dt_work,
     @Default(false) bool isHot,
     String? image,
   }) = _ServicesModel;

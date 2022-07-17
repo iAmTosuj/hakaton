@@ -63,7 +63,7 @@ class _AuthPageState extends State<AuthPage> {
               const SizedBox(
                 height: 16,
               ),
-              Text('Чтобы войти или вступить в клуб AVA Prime',
+              Text('Чтобы войти или вступить в клуб Acedia Prime',
                   style: ResTextTheme.subtitle1.copyWith(color: Colors.white)),
               const SizedBox(
                 height: 40,
@@ -72,6 +72,7 @@ class _AuthPageState extends State<AuthPage> {
                 style: const TextStyle(color: ResColors.bgGray0),
                 controller: phoneController,
                 enabled: !codeSend,
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   fillColor: const Color(0xFF1C355A),
                   hintText: '+79999999999',
@@ -88,6 +89,7 @@ class _AuthPageState extends State<AuthPage> {
                 TextField(
                   style: const TextStyle(color: ResColors.bgGray0),
                   controller: codeController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     fillColor: const Color(0xFF1C355A),
                     hintText: 'Код из смс',

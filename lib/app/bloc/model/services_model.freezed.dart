@@ -24,6 +24,7 @@ mixin _$ServicesModel {
   String get name => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String? get dt_work => throw _privateConstructorUsedError;
   bool get isHot => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $ServicesModelCopyWith<$Res> {
       String name,
       String status,
       String description,
+      String? dt_work,
       bool isHot,
       String? image});
 }
@@ -62,6 +64,7 @@ class _$ServicesModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? status = freezed,
     Object? description = freezed,
+    Object? dt_work = freezed,
     Object? isHot = freezed,
     Object? image = freezed,
   }) {
@@ -82,6 +85,10 @@ class _$ServicesModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      dt_work: dt_work == freezed
+          ? _value.dt_work
+          : dt_work // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHot: isHot == freezed
           ? _value.isHot
           : isHot // ignore: cast_nullable_to_non_nullable
@@ -106,6 +113,7 @@ abstract class _$$_ServicesModelCopyWith<$Res>
       String name,
       String status,
       String description,
+      String? dt_work,
       bool isHot,
       String? image});
 }
@@ -127,6 +135,7 @@ class __$$_ServicesModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? status = freezed,
     Object? description = freezed,
+    Object? dt_work = freezed,
     Object? isHot = freezed,
     Object? image = freezed,
   }) {
@@ -147,6 +156,10 @@ class __$$_ServicesModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      dt_work: dt_work == freezed
+          ? _value.dt_work
+          : dt_work // ignore: cast_nullable_to_non_nullable
+              as String?,
       isHot: isHot == freezed
           ? _value.isHot
           : isHot // ignore: cast_nullable_to_non_nullable
@@ -167,6 +180,7 @@ class _$_ServicesModel implements _ServicesModel {
       required this.name,
       required this.status,
       required this.description,
+      this.dt_work,
       this.isHot = false,
       this.image});
 
@@ -182,6 +196,8 @@ class _$_ServicesModel implements _ServicesModel {
   @override
   final String description;
   @override
+  final String? dt_work;
+  @override
   @JsonKey()
   final bool isHot;
   @override
@@ -189,7 +205,7 @@ class _$_ServicesModel implements _ServicesModel {
 
   @override
   String toString() {
-    return 'ServicesModel(id: $id, name: $name, status: $status, description: $description, isHot: $isHot, image: $image)';
+    return 'ServicesModel(id: $id, name: $name, status: $status, description: $description, dt_work: $dt_work, isHot: $isHot, image: $image)';
   }
 
   @override
@@ -202,6 +218,7 @@ class _$_ServicesModel implements _ServicesModel {
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.dt_work, dt_work) &&
             const DeepCollectionEquality().equals(other.isHot, isHot) &&
             const DeepCollectionEquality().equals(other.image, image));
   }
@@ -214,6 +231,7 @@ class _$_ServicesModel implements _ServicesModel {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(dt_work),
       const DeepCollectionEquality().hash(isHot),
       const DeepCollectionEquality().hash(image));
 
@@ -236,6 +254,7 @@ abstract class _ServicesModel implements ServicesModel {
       required final String name,
       required final String status,
       required final String description,
+      final String? dt_work,
       final bool isHot,
       final String? image}) = _$_ServicesModel;
 
@@ -250,6 +269,8 @@ abstract class _ServicesModel implements ServicesModel {
   String get status;
   @override
   String get description;
+  @override
+  String? get dt_work;
   @override
   bool get isHot;
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hakaton/app/bloc/services_cubit.dart';
 import 'package:hakaton/app/resources/res_colors.dart';
 import 'package:hakaton/app/resources/ui_icon.dart';
 import 'package:hakaton/app/router/route_info.dart';
@@ -69,7 +71,7 @@ class _FirstStep extends StatelessWidget {
           height: 60,
         ),
         Text(
-          'Спасибо, что выбрал AVA  Group!',
+          'Спасибо, что выбрал Acedia Prime!',
           textAlign: TextAlign.center,
           style: ResTextTheme.body2.copyWith(color: ResColors.bgGray0),
         ),
@@ -123,47 +125,40 @@ class _SecondStep extends StatelessWidget {
               children: [
                 Text(
                   'Возьмём на себя',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Text(
                   '  -  дизайн',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
                 Text(
                   '  -  расчёты',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
                 Text(
                   '  -  материалы',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 Text(
                   'Гарантируем',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Text(
                   '  -  качество',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
                 Text(
                   '  -  экономию',
-                  style:
-                      ResTextTheme.caption.copyWith(color: ResColors.bgGray0),
+                  style: ResTextTheme.body1.copyWith(color: ResColors.bgGray0),
                 ),
               ],
             ),
@@ -172,7 +167,7 @@ class _SecondStep extends StatelessWidget {
             ),
             Icon(
               UiIcon.hand_shaking,
-              size: 116,
+              size: 110,
               color: ResColors.bgGray0,
             )
           ],
@@ -202,6 +197,11 @@ class _SecondStep extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () async {
+                  BlocProvider.of<ServicesCubit>(context).sendServices(
+                    name: 'Лучший ремонт',
+                    description: 'Свяжемся с вами в ближайшее время!',
+                  );
+
                   CustomNavigator.pushWidget(
                       context: context,
                       child: SuccessScreen(

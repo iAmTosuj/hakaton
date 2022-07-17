@@ -12,6 +12,7 @@ _$_ServicesModel _$$_ServicesModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       status: json['status'] as String,
       description: json['description'] as String,
+      dt_work: json['dt_work'] as String?,
       isHot: json['isHot'] as bool? ?? false,
       image: json['image'] as String?,
     );
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$_ServicesModelToJson(_$_ServicesModel instance) =>
       'name': instance.name,
       'status': instance.status,
       'description': instance.description,
+      'dt_work': instance.dt_work,
       'isHot': instance.isHot,
       'image': instance.image,
     };
